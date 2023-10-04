@@ -5,8 +5,9 @@ public class Prompts
 {
     public List<string>  promptList;
     public Random random;
-
-    public Prompts()
+    public bool enablePrompts; // Add a boolean variable to enable/disable prompts
+    //public string noPrompt = "No prompt wanted.";
+    public Prompts(bool enablePrompts = true)
     {
         promptList = new List<string>
         {
@@ -18,14 +19,23 @@ public class Prompts
             "Who did you show kindness to?"
         };
         random = new Random();
+        this.enablePrompts = enablePrompts; // Initialize the enablePrompts variable
     }
 
     public string GetRandomPrompt()
     {
-        // Generate a random index to select prompt
-        int randomIndex = random.Next(0, promptList.Count);
-        // Return the random prompt
-        return promptList[randomIndex];
+        if (enablePrompts)
+        {
+            // Generate a random index to select prompt
+            int randomIndex = random.Next(0, promptList.Count);
+            // Return the random prompt
+            return promptList[randomIndex];
+        }
+        else
+        {
+            string noPrompt = "No prompt wanted.";
+            return noPrompt;
+        }
     }
 }
 

@@ -1,12 +1,35 @@
 using System;
+using System.IO;
+using System.Text;
 
-string filename = "myFile.txt";
-string[] lines = System.IO.File.ReadAllLines(filename);
-
-foreach (string line in lines)
+public class LoadFile
 {
-    string[] parts = line.Split(",");
+    public string LoadDataFromFile(string filename)
+    {
+        StringBuilder fileContents = new StringBuilder();
 
-    string firstName = parts[0];
-    string lastName = parts[1];
+        try
+        {
+            if (File.Exists(filename))
+            {
+                string[] lines = File.ReadAllLines(filename);
+
+                foreach (string line in lines)
+                {
+                    // Append each line to the StringBuilder
+                    fileContents.AppendLine(line);
+                }
+            }
+            else
+            {
+                Console.WriteLine("The file does not exist.");
+            }
+        }
+        catch (IOException e)
+        {
+            Console.WriteLine($"An error occurred while reading the file: {e.Message}");
+        }
+
+        return fileContents.ToString();
+    }
 }
