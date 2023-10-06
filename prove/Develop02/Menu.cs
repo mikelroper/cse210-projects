@@ -14,7 +14,8 @@ public class Menu
             "3. Load",
             "4. Save",
             "5. Quit",
-            "17. Disable Prompts"
+            "17. Disable Prompts",
+            ""
         };
     }
 
