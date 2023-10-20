@@ -20,23 +20,21 @@ class Program
     static void Main(string[] args)
     {
         Scripture scripture = new Scripture();
+        Console.Clear();
+        string itemFromReference = Reference.Items[randomIndexFromScripture];
+        Console.WriteLine(itemFromReference);
 
-        if (randomIndexFromScripture >= 0 && randomIndexFromScripture < Reference.Items.Count)
+        while (true)
         {
-            string itemFromReference = Reference.Items[randomIndexFromScripture];
-            Console.WriteLine(itemFromReference);
+            scripture.PrintScripture();
+            Console.WriteLine("Press Enter to continue or 'quit' to finish:");
+            string userInput = Console.ReadLine();
 
-            while (true)
+            if (userInput.ToLower() == "quit")
             {
-                scripture.PrintScripture();
-                Console.WriteLine("Press Enter to continue or 'quit' to finish:");
-                string userInput = Console.ReadLine();
-
-                if (userInput.ToLower() == "quit")
-                {
-                    break;
-                }
+                break;
             }
         }
+        
     }
 }
