@@ -10,64 +10,45 @@ enter that will exit the prompt.  Not intuitive, but it's there.
 */
 
 using System;
-using System.Text;
-
+using System.IO;
 class Program
 {
-    static bool enablePrompts = true;
-    static string name = "";
-    static string newData = "";
-    static string existingData = "";
-    static string combinedData = "";
-    
     static void Main(string[] args)
     {
-        DateTime theCurrentTime = DateTime.Now;
-        string dateText = theCurrentTime.ToShortDateString();
-        bool dataLoaded = false; 
-
         Console.WriteLine("Welcome to the Journal Program");
         Console.WriteLine("Please enter your first and last name:");
-        name = Console.ReadLine();
+        string name = Console.ReadLine();
         Prompts prompts = new Prompts();
+        bool enablePrompts = true; // Default to enabled.
+
+        Journal journal = new Journal(name);
+        string dateText = DateTime.Now.ToShortDateString();
 
         while (true)
         {
             Menu menu = new Menu();
             menu.DisplayMenu();
-            
-            //Console.Write("> ");
-            
+
             string userInput = Console.ReadLine();
             if (int.TryParse(userInput, out int menuOption))
             {
                 if (menuOption == 1)
                 {
+                    string newData;
                     if (enablePrompts)
                     {
                         string randomPrompt = prompts.GetRandomPrompt();
                         Console.WriteLine(randomPrompt);
+                        Console.WriteLine("Enter 'DONE' to exit writing.");
                     }
-                    DateTime currentDateTime = DateTime.Now;
-                    string dateTimeString = currentDateTime.ToString("yyyy-MM-dd HH:mm:ss"); //convert time to string for concat
-
-                    StringBuilder newDataBuilder = new StringBuilder();
-                    newDataBuilder.AppendLine($"{name}: {dateTimeString}");
-
-                    string line;
-                    while ((line = Console.ReadLine()) != "DONE")
-                    {
-                        newDataBuilder.AppendLine(line);
-                    }
-                    newData = newDataBuilder.ToString();
+                    newData = journal.GetUserJournalEntry(enablePrompts);
+                    string combinedData = journal.CombineData(dateText, newData);
                 }
                 else if (menuOption == 2)
                 {
-                    // Display function (no need to load here)
-                    if (dataLoaded)
+                    if (journal.DataLoaded) // Check if data is loaded
                     {
-                        // Display data
-                        Console.WriteLine(existingData);
+                        journal.DisplayEntries();
                     }
                     else
                     {
@@ -76,17 +57,14 @@ class Program
                 }
                 else if (menuOption == 3)
                 {
-                    // Load function (no display)
-                    LoadFile loader = new LoadFile();
+                    journal.LoadDataFromFile("myFile.txt");
+                    /*Journal loader = new LoadFile();
                     existingData = loader.LoadDataFromFile("myFile.txt");
-                    dataLoaded = true; 
+                    dataLoaded = true;*/
                 }
                 else if (menuOption == 4)
                 {
-                    combinedData = $"{name}: {dateText}\n{existingData}\n{newData}";
-                    string saveFileName = "myFile.txt";  
-                    SaveFile fileSaver = new SaveFile();
-                    fileSaver.SaveDataToFile(saveFileName, combinedData);
+                    journal.SaveDataToFile("myFile.txt");
                     Console.WriteLine("Data saved successfully.");
                 }
                 else if (menuOption == 5)
@@ -96,8 +74,8 @@ class Program
                 }
                 else if (menuOption == 17)
                 {
-                    enablePrompts = false;
-                    Console.WriteLine("Prompts have been disabled.");
+                    enablePrompts = !enablePrompts; // Toggle prompts on/off
+                    Console.WriteLine("Prompts have been " + (enablePrompts ? "enabled." : "disabled."));
                 }
                 else
                 {
@@ -107,3 +85,8 @@ class Program
         }
     }
 }
+
+
+
+
+
