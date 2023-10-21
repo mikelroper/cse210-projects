@@ -4,8 +4,10 @@ public class Scripture
 {
     private List<string> _scriptureList;
     private List<Word> memorizationList;
-    private List<int> hiddenIndices = new List<int>(); // Track hidden words
-    private int _scriptureIndex; //To track currently displayed scripture.
+    // Track hidden words
+    private List<int> hiddenIndices = new List<int>(); 
+    //To track the currently displayed scripture.
+    private int _scriptureIndex; 
 
     public Scripture()
     {
@@ -43,7 +45,7 @@ public class Scripture
         Console.WriteLine($"{reference} - {randomScripture}");
         Console.WriteLine("Press Enter to continue or 'quit' to finish:");
 
-        // A different variable name is needed here.
+        // A different variable name is needed here to avoid conflict.
         Random rng2 = new Random(); 
         int wordIndex = 0;
         int totalWords = memorizationList.Count;
@@ -73,7 +75,7 @@ public class Scripture
             // Check if all words are hidden.  If yes, program exits.
             if (hiddenIndices.Count == totalWords)
             {
-                Environment.Exit(0); // Terminate the application
+                Environment.Exit(0); // Terminate the application when complete
             }
 
         }

@@ -3,13 +3,14 @@ Extras:
 1. Random Scripture picking.
 The program will randomly pick a scripture from those included and display it.  
 The refernce for the scripture matches the random scripture based on the index value.
+There are comments in the code explaining some parts of it.
 */
 
 using System;
 
 class Program
 {
-    // random scripture is identified using the random index value
+    // A random scripture is identified using the random index value
     private static int randomIndexFromScripture; 
 
     public static void SetRandomIndex(int randomIndex)
@@ -34,6 +35,7 @@ class Program
             {
                 break;
             }
+            Console.Clear();
         }
         
     }
