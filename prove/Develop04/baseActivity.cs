@@ -60,14 +60,20 @@ public class BaseActivity
 
     public void DisplayCommonFinishingMessage()
     {
-        Console.WriteLine("You've completed the activity. Great job!");
+        Console.WriteLine($"You've completed the {attributes.ActivityName} activity. Great job!");
         behaviors.Pause(1000);
+        Console.Clear(); // Clear the screen
+        Console.WriteLine("Activity completed. Press any key to return to the menu.");
+        Console.ReadKey();
+        Console.ReadKey();
+        ReturnToMenu();
     }
 
+    
     public void ReturnToMenu()
     {
         Console.WriteLine("Returning to the menu...");
         Menu menu = new Menu();
-        menu.DisplayMenu();
+        Program.DisplayMainMenu(menu);
     }
 }

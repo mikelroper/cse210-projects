@@ -43,6 +43,9 @@ public class Reflection : BaseActivity
 
         // Conclude the activity with the standard finishing message
         DisplayCommonFinishingMessage();
+
+
+        ///////////////////////////  add menu display code here?
     }
 
     private void PerformReflectionExercise()

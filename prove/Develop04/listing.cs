@@ -19,7 +19,7 @@ public class Listings : BaseActivity
         listingsBehaviors = new Behaviors();
     }
 
-    public void StartListingsActivity()
+    public void StartListingActivity()
     {
         DisplayCommonStartingMessage(); // Display the standard starting message
 
@@ -48,21 +48,21 @@ public class Listings : BaseActivity
 
     // Calculate the elapsed time in seconds
     double elapsedSeconds = stopwatch.Elapsed.TotalSeconds;
-
+    Console.WriteLine($"Elapsed time: {elapsedSeconds:F2} seconds");
     // Conclude the activity with the standard finishing message
     DisplayCommonFinishingMessage();
 
-    Console.WriteLine($"Elapsed time: {elapsedSeconds:F2} seconds");
-}
+    
+    }
 
-private void StopListingsActivity(System.Timers.Timer timer)
-{
-    timer.Stop();
-    Console.WriteLine("Time's up!");
-    // Additional code to finish the activity, if needed.
-    DisplayCommonFinishingMessage();
-    ReturnToMenu();
-}
+    private void StopListingsActivity(System.Timers.Timer timer)
+    {
+        timer.Stop();
+        Console.WriteLine("Time's up!");
+        // Additional code to finish the activity, if needed.
+        DisplayCommonFinishingMessage();
+        ReturnToMenu();
+    }
 
     private void PerformListingsExercise()
     {

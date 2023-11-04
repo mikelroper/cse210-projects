@@ -1,59 +1,64 @@
 /*
-Add notes here..................
+Extras - I added comments to the code.
 */
 
+
+using System;
 
 class Program
 {
     static void Main(string[] args)
     {
         Menu menu = new Menu();
-
+        
         while (true)
         {
-            menu.DisplayMenu();
-            int choice = menu.GetUserSelectedOption();
-
-            switch (choice)
-            {
-                case 1:
-                    ExecuteBreathingActivity();
-                    break;
-                case 2:
-                    ExecuteReflectionActivity();
-                    break;
-                case 3:
-                    ExecuteListingsActivity();
-                    break;
-                case 4:
-                    Console.WriteLine("Goodbye!");
-                    Environment.Exit(0); // Exit the application
-                    return;
-                default:
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    break;
-            }
-
-            Console.WriteLine("\nPress any key to return to the main menu...");
-            Console.ReadKey();
+            DisplayMainMenu(menu);
         }
     }
 
-    static void ExecuteBreathingActivity()
+    public static void DisplayMainMenu(Menu menu)
     {
-        Breathing breathingActivity = new Breathing("Breathing Activity", "Activity description", "Guidance");
-        breathingActivity.StartBreathingActivity();
-    }
+        menu.DisplayMenu();
+        int choice = menu.GetUserSelectedOption();
 
-    static void ExecuteReflectionActivity()
-    {
-        Reflection reflectionActivity = new Reflection("Reflection Activity", "Activity description", "Guidance");
-        reflectionActivity.StartReflectionActivity();
-    }
-
-    static void ExecuteListingsActivity()
-    {
-        Listings listingsActivity = new Listings("Listings Activity", "Activity description", "Guidance");
-        listingsActivity.StartListingsActivity();
+        switch (choice)
+        {
+            case 1:
+                Breathing breathingActivity = new Breathing("Activity Name", "Activity Description", "Activity Guidance");
+                breathingActivity.StartBreathingActivity();
+                //Console.Clear(); // Clear the screen
+                Console.WriteLine("Activity completed. Press any key to return to the menu.");
+                //Console.ReadKey();
+                DisplayMainMenu(menu);
+                break;
+            
+            case 2:
+                Reflection reflectionActivity = new Reflection("Activity Name", "Activity Description", "Activity Guidance");
+                reflectionActivity.StartReflectionActivity();
+                //Console.Clear(); // Clear the screen
+                Console.WriteLine("Activity completed. Press any key to return to the menu.");
+                //Console.ReadKey();
+                DisplayMainMenu(menu);
+                break;
+            
+            case 3:
+                Listings listingActivity = new Listings("Activity Name", "Activity Description", "Activity Guidance");
+                listingActivity.StartListingActivity();
+                Console.Clear(); // Clear the screen
+                Console.WriteLine("Activity completed. Press any key to return to the menu.");
+                Console.ReadKey();
+                DisplayMainMenu(menu);
+                break;
+            
+            case 4:
+                Environment.Exit(0);
+                break;
+            
+            default:
+                Console.WriteLine("Please enter the number of the menu option.");
+                break;
+        }
     }
 }
+

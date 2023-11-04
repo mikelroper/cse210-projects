@@ -1,11 +1,15 @@
+using System.Diagnostics;
+
 public class Breathing : BaseActivity
 {
     private Behaviors breathingBehaviors;
+    private Stopwatch breathingStopwatch;
 
     public Breathing(string activityName, string activityDescription, string activityGuidance)
         : base(activityName, activityDescription, activityGuidance)
     {
         breathingBehaviors = new Behaviors();
+        breathingStopwatch = new Stopwatch();
     }
 
     public void StartBreathingActivity()
@@ -19,9 +23,14 @@ public class Breathing : BaseActivity
         Console.WriteLine("Please specify the duration for this breathing exercise.");
         duration = GetDurationFromUser();
 
+        // Start the stopwatch when the breathing activity begins
+        breathingStopwatch.Start();
+
         // Perform the breathing exercise
         PerformBreathingExercise();
 
+        // Stop the stopwatch when the breathing activity is complete
+        breathingStopwatch.Stop();
         // Conclude the activity with the standard finishing message
         DisplayCommonFinishingMessage();
     }
