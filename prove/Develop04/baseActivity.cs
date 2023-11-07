@@ -63,17 +63,8 @@ public class BaseActivity
         Console.WriteLine($"You've completed the {attributes.ActivityName} activity. Great job!");
         behaviors.Pause(1000);
         Console.Clear(); // Clear the screen
-        Console.WriteLine("Activity completed. Press any key to return to the menu.");
-        Console.ReadKey();
-        Console.ReadKey();
-        ReturnToMenu();
-    }
-
-    
-    public void ReturnToMenu()
-    {
-        Console.WriteLine("Returning to the menu...");
-        Menu menu = new Menu();
-        Program.DisplayMainMenu(menu);
+        Console.WriteLine("Activity completed. Returning to the menu.");
+        Program.DisplayMenu();
     }
 }
+

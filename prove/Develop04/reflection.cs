@@ -34,7 +34,7 @@ public class Reflection : BaseActivity
         // Customize the description for the reflection activity
         Console.WriteLine("This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.");
 
-        // Prompt user for the number of seconds for the reflection activity
+        // Prompt user for the number of seconds
         Console.WriteLine("Please specify the duration for this reflection exercise.");
         duration = GetDurationFromUser();
 
@@ -43,9 +43,6 @@ public class Reflection : BaseActivity
 
         // Conclude the activity with the standard finishing message
         DisplayCommonFinishingMessage();
-
-
-        ///////////////////////////  add menu display code here?
     }
 
     private void PerformReflectionExercise()
@@ -58,7 +55,7 @@ public class Reflection : BaseActivity
             string randomQuestion = reflectionQuestions[new Random().Next(reflectionQuestions.Length)];
 
             Console.WriteLine(randomPrompt);
-            reflectionBehaviors.PauseWithSpinner(4000); // Pause for 4 seconds with a spinner
+            reflectionBehaviors.PauseWithSpinner(5000); // Pause for 5 seconds with a spinner
 
             Console.WriteLine("Now, please reflect on the following question:");
             Console.WriteLine(randomQuestion);

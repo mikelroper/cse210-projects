@@ -1,5 +1,6 @@
 /*
 Extras - I added comments to the code.
+limited Error handling
 */
 
 
@@ -7,21 +8,42 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+static void Main(string[] args)
     {
-        Menu menu = new Menu();
-        
         while (true)
         {
-            DisplayMainMenu(menu);
+            DisplayMenu();
         }
     }
 
-    public static void DisplayMainMenu(Menu menu)
+    public static void DisplayMenu()
     {
-        menu.DisplayMenu();
-        int choice = menu.GetUserSelectedOption();
+        Console.WriteLine("Welcome to the Activity Menu");
+        Console.WriteLine("1. Breathing Activity");
+        Console.WriteLine("2. Reflection Activity");
+        Console.WriteLine("3. Listings Activity");
+        Console.WriteLine("4. Exit");
 
+        int choice = GetUserSelectedOption();
+        HandleMenuOption(choice);
+    }
+
+    public static int GetUserSelectedOption()
+    {
+        Console.Write("Select a choice from the menu: ");
+        int choice;
+
+        while (!int.TryParse(Console.ReadLine(), out choice))
+        {
+            Console.WriteLine("Invalid choice. Please enter a valid option.");
+            Console.Write("Select a choice from the menu: ");
+        }
+
+        return choice;
+    }
+
+    public static void HandleMenuOption(int choice)
+    {
         switch (choice)
         {
             case 1:
@@ -30,7 +52,7 @@ class Program
                 //Console.Clear(); // Clear the screen
                 Console.WriteLine("Activity completed. Press any key to return to the menu.");
                 //Console.ReadKey();
-                DisplayMainMenu(menu);
+                //DisplayMainMenu(menu);
                 break;
             
             case 2:
@@ -39,7 +61,7 @@ class Program
                 //Console.Clear(); // Clear the screen
                 Console.WriteLine("Activity completed. Press any key to return to the menu.");
                 //Console.ReadKey();
-                DisplayMainMenu(menu);
+                //DisplayMainMenu(menu);
                 break;
             
             case 3:
@@ -48,7 +70,7 @@ class Program
                 Console.Clear(); // Clear the screen
                 Console.WriteLine("Activity completed. Press any key to return to the menu.");
                 Console.ReadKey();
-                DisplayMainMenu(menu);
+                //DisplayMainMenu(menu);
                 break;
             
             case 4:

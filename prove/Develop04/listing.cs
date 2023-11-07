@@ -59,9 +59,7 @@ public class Listings : BaseActivity
     {
         timer.Stop();
         Console.WriteLine("Time's up!");
-        // Additional code to finish the activity, if needed.
         DisplayCommonFinishingMessage();
-        ReturnToMenu();
     }
 
     private void PerformListingsExercise()
@@ -76,7 +74,7 @@ public class Listings : BaseActivity
 
             Console.WriteLine(randomPrompt);
             listingsBehaviors.Countdown(5); // Countdown for 5 seconds to begin thinking about the prompt
-
+            Console.WriteLine("Go!");
             
             itemCounter += ListItemsUntilExit();
 
