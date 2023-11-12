@@ -28,10 +28,10 @@ public class Listings : BaseActivity
 
     // Prompt user for the number of seconds for the listings activity
     Console.WriteLine("Please specify the duration for this listings exercise.");
-    duration = GetDurationFromUser();
+    _duration = GetDurationFromUser();
 
     // Create a timer to automatically stop the activity
-    System.Timers.Timer timer = new System.Timers.Timer(duration * 1000);
+    System.Timers.Timer timer = new System.Timers.Timer(_duration * 1000);
     timer.Elapsed += (sender, e) => StopListingsActivity(timer);
     timer.AutoReset = false;
     timer.Start();
@@ -68,7 +68,7 @@ public class Listings : BaseActivity
 
         int itemCounter = 0;
 
-        for (int i = 0; i < duration;)
+        for (int i = 0; i < _duration;)
         {
             string randomPrompt = listingsPrompts[new Random().Next(listingsPrompts.Length)];
 
@@ -80,7 +80,7 @@ public class Listings : BaseActivity
 
             i += 5; // Increment by the countdown time
 
-            if (i >= duration)
+            if (i >= _duration)
                 break;
         }
 

@@ -6,9 +6,12 @@ public class BaseActivity
 {
     private Attributes attributes;
     protected Behaviors behaviors;
-    protected int duration;
+    protected int _duration;
     private Stopwatch sw = new Stopwatch();
     private double lastFrame;
+
+    public BaseActivity(){}  //this means you can instantiate this with or without arguments.  which by calling this allows for arguments to be passed or not.
+
 
     public BaseActivity(string activityName, string activityDescription, string activityGuidance)
     {
@@ -21,7 +24,7 @@ public class BaseActivity
         Console.WriteLine($"Activity: {attributes.ActivityName}");
         Console.WriteLine(attributes.ActivityDescription);
         //duration = GetDurationFromUser(); // Set the duration field
-        Console.WriteLine($"You have {duration} seconds for this activity.");
+        Console.WriteLine($"You have {_duration} seconds for this activity.");
     }
 
     public int GetDurationFromUser()
@@ -64,7 +67,6 @@ public class BaseActivity
         behaviors.Pause(1000);
         Console.Clear(); // Clear the screen
         Console.WriteLine("Activity completed. Returning to the menu.");
-        Program.DisplayMenu();
     }
 }
 

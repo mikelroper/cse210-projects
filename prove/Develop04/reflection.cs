@@ -36,7 +36,7 @@ public class Reflection : BaseActivity
 
         // Prompt user for the number of seconds
         Console.WriteLine("Please specify the duration for this reflection exercise.");
-        duration = GetDurationFromUser();
+        _duration = GetDurationFromUser();
 
         // Perform the reflection exercise
         PerformReflectionExercise();
@@ -49,7 +49,7 @@ public class Reflection : BaseActivity
     {
         Console.WriteLine("Let's begin the reflection exercise!");
 
-        for (int i = 0; i < duration;)
+        for (int i = 0; i < _duration;)
         {
             string randomPrompt = reflectionPrompts[new Random().Next(reflectionPrompts.Length)];
             string randomQuestion = reflectionQuestions[new Random().Next(reflectionQuestions.Length)];
@@ -63,7 +63,7 @@ public class Reflection : BaseActivity
 
             i += 9; // Increment by the total pause time
 
-            if (i >= duration)
+            if (i >= _duration)
                 break;
         }
     }

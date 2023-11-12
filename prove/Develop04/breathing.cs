@@ -21,13 +21,17 @@ public class Breathing : BaseActivity
 
         // Prompt the user for the number of seconds for the breathing activity
         Console.WriteLine("Please specify the duration for this breathing exercise.");
-        duration = GetDurationFromUser();
+        _duration = GetDurationFromUser();
 
         // Start the stopwatch when the breathing activity begins
         breathingStopwatch.Start();
+        Console.WriteLine("Let's begin the breathing exercise!");
 
         // Perform the breathing exercise
+        while ((breathingStopwatch.ElapsedMilliseconds / 1000) < _duration) {
+        //Console.WriteLine((breathingStopwatch.ElapsedMilliseconds / 1000).ToString()); //error checking
         PerformBreathingExercise();
+        }
 
         // Stop the stopwatch when the breathing activity is complete
         breathingStopwatch.Stop();
@@ -37,13 +41,12 @@ public class Breathing : BaseActivity
 
     private void PerformBreathingExercise()
     {
-        Console.WriteLine("Let's begin the breathing exercise!");
-        for (int i = 0; i < duration; i += 4) // Increment by 4 seconds
-        {
+        
+                
             Console.WriteLine("Breathe in...");
             breathingBehaviors.Countdown(4); // Call the Countdown method on the breathingBehaviors instance
             Console.WriteLine("Breathe out...");
             breathingBehaviors.Countdown(4); // Call the Countdown method on the breathingBehaviors instance
-        }
+        
     }
 }
