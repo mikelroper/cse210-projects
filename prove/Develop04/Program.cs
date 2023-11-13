@@ -21,11 +21,13 @@ static void Main(string[] args)
         /* activityLog.Add(new Attributes("breathing","more breathing","don't breathe too much")); //activity logs now includes the attributes.
         activityLog.Add(new Attributes("listing","more breathing","don't breathe too much"));
         activityLog.Add(new Attributes("reflection","more breathing","don't breathe too much")); */
-        List<Attributes> savedActivityLog = JsonSerializer.Deserialize<List<Attributes>>(File.ReadAllText(@".\person.json")); //this loads the file - this could then be displayed and updated, changed, etc.
-        savedActivityLog.Add(new Attributes("banana","more breathing","don't breathe too much"));
-        File.WriteAllText(@".\person.json", JsonSerializer.Serialize<List<Attributes>>(savedActivityLog));  // this oututs to a json file using the var a
         
-        while (!exit)  //this is shorthand does not equal false bool specific.
+        //json read from file and output back to file
+        /* List<Attributes> savedActivityLog = JsonSerializer.Deserialize<List<Attributes>>(File.ReadAllText(@".\person.json")); //this loads the file - this could then be displayed and updated, changed, etc.
+        savedActivityLog.Add(new Attributes("banana","more breathing","don't breathe too much"));
+        File.WriteAllText(@".\person.json", JsonSerializer.Serialize<List<Attributes>>(savedActivityLog)); */  // this oututs to a json file using the var a
+        
+        while (!exit)  //this is shorthand: does not equal false bool specific.
         {
             //DisplayMenu();
             //var m=new Menu(); //instantiates menu - this creates a new instance of a menu object - instantiate means to bring into instance of.
