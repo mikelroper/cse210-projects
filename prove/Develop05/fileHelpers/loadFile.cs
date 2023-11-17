@@ -8,7 +8,7 @@ class LoadGoalsFromFile
         {
             if (File.Exists(@".\person.json"))
             {
-                string json = File.ReadAllText(@".\person.json");
+                string json = File.ReadAllText(@".\person.json");  //change name of save file in load and save.cs files
                 return JsonSerializer.Deserialize<List<Attributes>>(json);
             }
             else
