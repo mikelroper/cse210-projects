@@ -1,6 +1,6 @@
 public class BaseGoal
 {
-    private Attributes attributes;
+    protected Attributes attributes;
     protected string _goalType;
     protected string _goalName;
     protected string _goalDescription;
@@ -9,11 +9,12 @@ public class BaseGoal
     protected int _goalBonusValue;
     protected int _totalPoints;
 
-    public BaseGoal(){}  //this means you can instantiate this with or without arguments.  which by calling this allows for arguments to be passed or not.
+   // public BaseGoal(){}  //this means you can instantiate this with or without arguments.  which by calling this allows for arguments to be passed or not.
 
 
-    public BaseGoal(string goalName, string goalDescription, int goalPoints)
+    public BaseGoal(string goalType, string goalName, string goalDescription, int goalPoints, int totalPoints)
     {
+        _goalType = goalType;
         _goalName = goalName;
         _goalDescription = goalDescription;
         _goalPoints = goalPoints;

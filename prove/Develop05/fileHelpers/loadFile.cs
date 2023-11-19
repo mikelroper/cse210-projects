@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 class LoadGoalsFromFile
@@ -6,9 +10,9 @@ class LoadGoalsFromFile
     {
         try
         {
-            if (File.Exists(@".\person.json"))
+            if (File.Exists(@".\goals.json"))
             {
-                string json = File.ReadAllText(@".\person.json");  //change name of save file in load and save.cs files
+                string json = File.ReadAllText(@".\goals.json");
                 return JsonSerializer.Deserialize<List<Attributes>>(json);
             }
             else
@@ -23,6 +27,7 @@ class LoadGoalsFromFile
             return null;
         }
     }
+
     public static void DisplayGoals(List<Attributes> goals)
     {
         if (goals != null && goals.Any())
@@ -30,7 +35,7 @@ class LoadGoalsFromFile
             Console.WriteLine("List of Goals:");
             foreach (var goal in goals)
             {
-                Console.WriteLine($"Goal Name: {goal.GoalName}, Description: {goal.GoalDescription}, Points: {goal.GoalPoints}");
+                Console.WriteLine($"Goal Type: {goal.GoalType}; Goal Name: {goal.GoalName}, Description: {goal.GoalDescription}, Points: {goal.GoalPoints}, TotalPoints: {goal.TotalPoints}");
             }
         }
         else
@@ -39,12 +44,15 @@ class LoadGoalsFromFile
         }
     }
 
-    // This section is to load recorded goals - or recorded events
-    //need to sum them and extract the value point value of the goal, and multiply.
+    public static List<BaseGoal> ConvertAttributesToBaseGoals(List<Attributes> attributesList)
+    {
+        if (attributesList == null)
+        {
+            return new List<BaseGoal>();
+        }
 
-
-
-
-
-
+        return attributesList.Select(attr =>
+            new BaseGoal(attr.GoalType, attr.GoalName, attr.GoalDescription, attr.GoalPoints, attr.TotalPoints)
+        ).ToList();
+    }
 }

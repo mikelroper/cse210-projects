@@ -72,7 +72,8 @@ public static int GetUserGoalSelectedOption()
             
             case 3:
                 List<Attributes> loadedGoalsForSave = LoadGoalsFromFile.LoadGoalsFromJson();
-                SaveGoalsToFile.SaveGoalsToJson(loadedGoals); // Call the method to load goals from JSON
+                List<BaseGoal> baseGoalsList = loadedGoalsForSave.Select(goal => (BaseGoal)goal).ToList();
+                SaveGoalsToFile.SaveGoalsToJson(baseGoalsList); // Call the method to load goals from JSON
                 break;
             case 4:
                 LoadGoalsFromFile.LoadGoalsFromJson(); // Call the method to load goals from JSON
