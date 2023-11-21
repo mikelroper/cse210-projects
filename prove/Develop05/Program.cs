@@ -32,8 +32,19 @@ static void Main(string[] args)
         // Load goals from the JSON file, if available
         if (File.Exists("goals.json"))
         {
-            string json = File.ReadAllText("goals.json");
-            existingGoals = JsonSerializer.Deserialize<List<BaseGoal>>(json);
+             string json = File.ReadAllText("goals.json");
+            if (!string.IsNullOrWhiteSpace(json))
+            {
+                try
+                {
+                    existingGoals = JsonSerializer.Deserialize<List<BaseGoal>>(json);
+                }
+                catch (JsonException ex)
+                {
+                    Console.WriteLine($"Error deserializing JSON: {ex.Message}");
+                    // Handle deserialization error
+                }
+            }
         }
         else
         {
