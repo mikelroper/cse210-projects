@@ -6,20 +6,20 @@ using System.Text.Json;
 
 class LoadGoalsFromFile
 {
+    private const string FileName = @".\goals.json";
     public static List<Attributes> LoadGoalsFromJson()
     {
         try
         {
-            if (File.Exists(@".\goals.json"))
+            if (!File.Exists(FileName))
             {
-                string json = File.ReadAllText(@".\goals.json");
-                return JsonSerializer.Deserialize<List<Attributes>>(json);
+                Console.WriteLine("The goals file doesn't exist. Creating a new file.");
+                File.Create(FileName).Close();
+                return new List<Attributes>(); // Return an empty list as there are no goals yet.
             }
-            else
-            {
-                Console.WriteLine("No goals found in the JSON file.");
-                return null;
-            }
+
+            string json = File.ReadAllText(FileName);
+            return JsonSerializer.Deserialize<List<Attributes>>(json);
         }
         catch (Exception ex)
         {
@@ -52,7 +52,7 @@ class LoadGoalsFromFile
         }
 
         return attributesList.Select(attr =>
-            new BaseGoal(attr.GoalType, attr.GoalName, attr.GoalDescription, attr.GoalPoints, attr.TotalPoints)
+            BaseGoal.Create(attr.GoalType, attr.GoalName, attr.GoalDescription, attr.GoalPoints, attr.TotalPoints)
         ).ToList();
     }
 }

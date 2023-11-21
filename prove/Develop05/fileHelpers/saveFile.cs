@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
+
 
 class SaveGoalsToFile
 {
@@ -13,9 +12,20 @@ class SaveGoalsToFile
                 loadedGoals = new List<BaseGoal>();
             }
 
-            // Save the updated list back to the JSON file
+            string fileName = "goals.json";
+
+            // Check if the file exists
+            if (!File.Exists(fileName))
+            {
+                // Create the file if it doesn't exist
+                File.Create(fileName).Close();
+            }
+
+            // Serialize the goals to JSON
             string updatedJson = JsonSerializer.Serialize(loadedGoals, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText("goals.json", updatedJson);
+
+            // Write the JSON to the file (overwrite existing content)
+            File.WriteAllText(fileName, updatedJson);
 
             Console.WriteLine("Goals saved successfully.");
         }
@@ -25,4 +35,3 @@ class SaveGoalsToFile
         }
     }
 }
-

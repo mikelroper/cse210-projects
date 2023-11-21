@@ -66,4 +66,39 @@ class RecordEvent
             Console.WriteLine("Invalid input for points.");
         }
     }
+    public void RecordEventAndUpdateGoals()
+    {
+        DisplayGoals(); // Show the list of goals
+        
+        // Get the user's choice of which goal to update based on the event
+        Console.WriteLine("Enter the number of the goal you completed: ");
+        int selectedGoalNumber;
+
+        // Input validation to ensure a valid goal number is entered
+        while (!int.TryParse(Console.ReadLine(), out selectedGoalNumber) || selectedGoalNumber < 1 || selectedGoalNumber > LoadedGoals.Count)
+        {
+            Console.WriteLine("Invalid input. Please enter a valid goal number.");
+            Console.WriteLine("Enter the number of the goal you completed: ");
+        }
+
+        // Get the selected goal from the loaded goals list
+        var goalToUpdate = LoadedGoals[selectedGoalNumber - 1]; // Adjust index
+
+        // Logic to record the event and update the goal properties (e.g., points)
+        Console.WriteLine($"Enter the points achieved for {goalToUpdate.GoalName}: ");
+        if (int.TryParse(Console.ReadLine(), out int pointsAchieved))
+        {
+            // Update the goal's points with the recorded event points
+            goalToUpdate.UpdateTotalPoints(pointsAchieved);
+
+            // Save the updated goals to the JSON file
+            SaveGoalsToFile.SaveGoalsToJson(LoadedGoals);
+
+            Console.WriteLine($"Points updated for {goalToUpdate.GoalName}. Goals saved successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid input for points.");
+        }
+    }
 }

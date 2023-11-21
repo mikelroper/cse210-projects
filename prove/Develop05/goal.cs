@@ -8,19 +8,18 @@ public class BaseGoal
     protected int _goalPoints;
     protected int _goalBonusValue;
     protected int _totalPoints;
-
-   // public BaseGoal(){}  //this means you can instantiate this with or without arguments.  which by calling this allows for arguments to be passed or not.
-
-
-    public BaseGoal(string goalType, string goalName, string goalDescription, int goalPoints, int totalPoints)
+    public static List<BaseGoal> Goals = new List<BaseGoal>();
+    
+    public static BaseGoal Create(string goalType, string goalName, string goalDescription, int goalPoints, int totalPoints)
     {
-        _goalType = goalType;
-        _goalName = goalName;
-        _goalDescription = goalDescription;
-        _goalPoints = goalPoints;
-        _totalPoints = 0;
+        BaseGoal newGoal = new BaseGoal();
+        newGoal.GoalType = goalType;
+        newGoal.GoalName = goalName;
+        newGoal.GoalDescription = goalDescription;
+        newGoal.GoalPoints = goalPoints;
+        newGoal.TotalPoints = totalPoints;
+        return newGoal;
     }
-
     
     public string GoalType
     {
@@ -68,4 +67,10 @@ public class BaseGoal
     {
         _totalPoints += additionalPoints;
     }
+
+    public static void AddGoal(BaseGoal goal)
+    {
+        Goals.Add(goal);
+    }
+
 }

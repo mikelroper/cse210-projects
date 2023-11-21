@@ -1,11 +1,6 @@
 public class SimpleGoal : BaseGoal
 {
-    private string simple;
-
-    /* public SimpleGoal(string goalType, string goalName, string goalDescription, int goalPoints, int totalPoints) : base(goalType, goalName, goalDescription, goalPoints, totalPoints)
-    {
-    } */
-
+    
 
     public void CreateSimpleGoal()
     {
@@ -23,6 +18,11 @@ public class SimpleGoal : BaseGoal
         GoalPoints = goalPoints;
         Console.WriteLine("");
         TotalPoints = 0;
+
+        SimpleGoal newSimpleGoal = new SimpleGoal();
+        newSimpleGoal._goalType = "simple";
+        BaseGoal.AddGoal(newSimpleGoal);
+        SaveGoalsToFile.SaveGoalsToJson(BaseGoal.Goals);
     }
      
 }
