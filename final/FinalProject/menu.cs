@@ -11,7 +11,7 @@ public class MenuHelper
 
     public static void DisplayMenu()
     {
-        Console.WriteLine("Welcome Goal Tracking");
+        Console.WriteLine("Welcome to TimeTracking");
         Console.WriteLine("1. Log Time");
         Console.WriteLine("2. View Time");
         Console.WriteLine("3. View User");
@@ -35,7 +35,7 @@ public class MenuHelper
     }
 
 
-    public static void DisplayGoalMenu()
+    public static void DisplayGoalMenu()  //change name and update
     {
         Console.WriteLine("The Types of Goals Are:");
         Console.WriteLine("1. Simple Goal");
@@ -43,7 +43,7 @@ public class MenuHelper
         Console.WriteLine("3. Checklist Goal");
     }
 
-public static int GetUserGoalSelectedOption()
+public static int GetUserGoalSelectedOption() //change name and update
     {
         Console.Write("Which Type of Goal would you like to create? ");
         int choice;
