@@ -3,7 +3,7 @@ using System.Text.Json;
 
 class SaveGoalsToFile
 {
-    public static void SaveGoalsToJson(List<BaseGoal> loadedGoals)
+    /* public static void SaveGoalsToJson(List<BaseGoal> loadedGoals)
     {
         try
         {
@@ -33,5 +33,5 @@ class SaveGoalsToFile
         {
             Console.WriteLine($"An error occurred while saving goals: {ex.Message}");
         }
-    }
+    } */
 }

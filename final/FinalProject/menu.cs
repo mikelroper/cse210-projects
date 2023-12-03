@@ -67,10 +67,10 @@ public static int GetUserGoalSelectedOption()
             case 1:
                 DisplayGoalMenu(); // Call DisplayGoalMenu
                 int goalTypeChoice = GetUserGoalSelectedOption(); // Get the user's choice for goal type
-                HandleSubMenuOption(goalTypeChoice); // Handle the submenu option based on the user's choice
+                //HandleSubMenuOption(goalTypeChoice); // Handle the submenu option based on the user's choice
                 break;
             
-            case 2:
+            /* case 2:
                 List<Attributes> loadedGoals = LoadGoalsFromFile.LoadGoalsFromJson();
                 LoadGoalsFromFile.DisplayGoals(loadedGoals);
                 break;
@@ -82,14 +82,14 @@ public static int GetUserGoalSelectedOption()
                 break;
             case 4:
                 LoadGoalsFromFile.LoadGoalsFromJson(); // Call the method to load goals from JSON
-                break;
+                break; */
             case 5: //record event
 
                 break;
         }
     }
     
-    public static void HandleSubMenuOption(int choice)
+    /* public static void HandleSubMenuOption(int choice)
     {
         //createdSimpleGoal = null;  //add createdEternal and checklist here and in the declaration above?
         switch (choice)
@@ -108,5 +108,5 @@ public static int GetUserGoalSelectedOption()
                 break;
         }
 
-    }
+    } */
 }

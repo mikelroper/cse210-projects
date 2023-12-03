@@ -3,7 +3,7 @@
 
 class RecordEvent
 {
-    public List<BaseGoal> LoadedGoals { get; private set; }
+    /* public List<BaseGoal> LoadedGoals { get; private set; }
 
 
     public RecordEvent()
@@ -103,5 +103,5 @@ class RecordEvent
         {
             Console.WriteLine("Invalid input for points.");
         }
-    }
+    } */
 }

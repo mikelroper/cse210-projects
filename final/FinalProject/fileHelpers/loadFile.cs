@@ -6,8 +6,8 @@ using System.Text.Json;
 
 class LoadGoalsFromFile
 {
-    private const string FileName = @".\goals.json";
-    public static List<Attributes> LoadGoalsFromJson()
+    /*private const string FileName = @".\goals.json";
+     public static List<Attributes> LoadGoalsFromJson()
     {
         try
         {
@@ -54,5 +54,5 @@ class LoadGoalsFromFile
         return attributesList.Select(attr =>
             BaseGoal.Create(attr.GoalType, attr.GoalName, attr.GoalDescription, attr.GoalPoints, attr.TotalPoints)
         ).ToList();
-    }
+    } */
 }
