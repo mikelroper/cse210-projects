@@ -12,7 +12,7 @@ public class MenuHelper
     public static void DisplayMenu()
     {
         Console.WriteLine("Welcome to TimeTracking");
-        Console.WriteLine("1. Log Time");
+        Console.WriteLine("1. Log Time Entry");
         Console.WriteLine("2. View Time");
         Console.WriteLine("3. View User");
         Console.WriteLine("4. Add User");
