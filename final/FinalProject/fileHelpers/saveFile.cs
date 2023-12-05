@@ -1,7 +1,7 @@
 using System.Text.Json;
 
 
-class SaveGoalsToFile
+class SaveUserToFile
 {
     public static void SaveUserToJson(List<Users> user)
     {
@@ -21,17 +21,17 @@ class SaveGoalsToFile
                 File.Create(fileName).Close();
             }
 
-            // Serialize the goals to JSON
+            // Serialize the user to JSON
             string updatedJson = JsonSerializer.Serialize(user, new JsonSerializerOptions { WriteIndented = true });
 
             // Write the JSON to the file (overwrite existing content)
             File.WriteAllText(fileName, updatedJson);
 
-            Console.WriteLine("Goals saved successfully.");
+            Console.WriteLine("User saved successfully.");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred while saving goals: {ex.Message}");
+            Console.WriteLine($"An error occurred while saving user: {ex.Message}");
         }
     } 
 
@@ -44,7 +44,7 @@ class SaveGoalsToFile
                 user = new List<Users>();
             }
 
-            string fileName = "users.json";
+            string fileName = "time.json";
 
             // Check if the file exists
             if (!File.Exists(fileName))

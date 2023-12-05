@@ -7,6 +7,7 @@ using System.Text.Json;
 class LoadJsonFile
 {
     private const string FileName = @".\users.json";
+    private const string FileNameTime = @".\time.json";
      public static List<Users> LoadUsersFromJson()
     {
         try

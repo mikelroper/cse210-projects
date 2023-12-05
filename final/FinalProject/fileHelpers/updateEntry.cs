@@ -1,4 +1,4 @@
-// update entry.  This includes adding a user
+// update user entry.  
 // save should be called automatically as part of the update.
 
 class RecordEvent

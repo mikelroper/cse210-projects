@@ -9,6 +9,7 @@ class Users
     private string EmployeeName { get; set; }
     private string Title { get; set; }
     private DateTime HireDate { get; set; }
+    private DateTime EndDate { get; set; }
     private bool EmpStatus { get; set; }
 
     public string GetEmployeeName()
@@ -26,11 +27,25 @@ class Users
         return HireDate;
     }
 
+    public DateTime GetEndDate()
+    {
+        return HireDate;
+    }
     public bool GetEmpStatus()
     {
         return EmpStatus;
     }
 
+    // Constructor
+    public Users(string employeeName, string title, DateTime hireDate, DateTime endDate, bool empStatus)
+    {
+        EmployeeName = employeeName;
+        Title = title;
+        HireDate = hireDate;
+        EndDate = endDate;
+        EmpStatus = empStatus;
+    }
+    
     public static Users CreateNewUser()
     {
         Console.WriteLine("Enter the new employee's first name: ");
@@ -49,14 +64,9 @@ class Users
 
         Console.WriteLine("Hire Date is set as today.");
         DateTime hireDate = DateTime.Now;
+        DateTime endDate = DateTime.MinValue;
 
-        return new Users
-        {
-            EmployeeName = employeeName,
-            Title = title,
-            HireDate = hireDate,
-            EmpStatus = true // The new employee should have an active status
-        };
+        return new Users(employeeName, title, hireDate, endDate, true);
     }
 
     /* public static void DisplayUsers(List<Users> users) //this is not needed here as it should be part of the load file process.
