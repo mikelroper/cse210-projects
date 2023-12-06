@@ -22,7 +22,7 @@ public class MenuHelper
     public static void DisplayMenu()
     {
         Console.WriteLine("Welcome to TimeTracking");
-        Console.WriteLine($"Welcome {displayName}.  Please select and option from the menu: ");
+        Console.WriteLine($"Welcome {displayName}.  Please select and option from the menu: ");  // display name is not prompting for entry.
         Console.WriteLine("1. Log Time Entry");
         Console.WriteLine("2. View Time");
         Console.WriteLine("3. View User");
@@ -51,6 +51,22 @@ public class MenuHelper
         Console.WriteLine("Which time option do you want to log? ");
         Console.WriteLine("1. Log Start Time");
         Console.WriteLine("2. Log End Time");
+    }
+
+    public static void SelectUser()
+    {
+        // need to list out each employee then in the next method, prompt for which data to update.
+        // for each loop in user data file
+    }
+    
+    public static void UpdateUserData()  
+    {
+        Console.WriteLine("Which employee data item do you want to update? ");
+        Console.WriteLine("1. Log Start Time");  // change these to match the list.
+        Console.WriteLine("2. Log End Time");
+        Console.WriteLine("3. Log End Time");
+        Console.WriteLine("4. Log End Time");
+        Console.WriteLine("5. Log End Time");
     }
 
 // This needs to be revamped -
@@ -101,7 +117,13 @@ public class MenuHelper
             if (empOrMgr.GetUserTitle(displayName) == "MGR")
             {
                 //This requires a submenu which will have case logic to call the differnt methods in updateUYser.cs
-                //UpdateUser.UpdateUserOption();
+                SelectUser();
+                
+                // this will be a nested logic section after the user is called.  another case statement?
+                UpdateUserData();
+                int updateUserChoice = GetUserSelectedOption();
+                HandleSubMenuUpdateUserDataOption(choice);
+                
             }
             else
             {
@@ -131,20 +153,31 @@ public class MenuHelper
 
     }
 
-    public static void HandleSubMenuUpdateUserOption(int choice)
+    public static void HandleSubMenuUpdateUserDataOption(int choice)
     {
         switch (choice)
         {
             case 1:
-                time.LogStartTime();
-                Console.WriteLine("Start time logged.");
+                // update employee name
                 
                 break;
             case 2:
-                time.LogEndTime();
-                Console.WriteLine("End time logged.");
+                //update title
+                break;
+            case 3:
+                // update hiredate
+                break;
+            case 4:
+                // update end date
+                break;
+            case 5:
+                // update emp status
+                break;
+            case 6:
+                // return to main menu
                 break;
         }
 
     }
+
 }
