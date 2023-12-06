@@ -25,34 +25,5 @@ static void Main(string[] args)
         }
         
     }
-    /* static List<BaseGoal> LoadExistingGoals()
-    {
-        List<BaseGoal> existingGoals = new List<BaseGoal>();
-
-        // Load goals from the JSON file, if available
-        if (File.Exists("goals.json"))
-        {
-             string json = File.ReadAllText("goals.json");
-            if (!string.IsNullOrWhiteSpace(json))
-            {
-                try
-                {
-                    existingGoals = JsonSerializer.Deserialize<List<BaseGoal>>(json);
-                }
-                catch (JsonException ex)
-                {
-                    Console.WriteLine($"Error deserializing JSON: {ex.Message}");
-                    // Handle deserialization error
-                }
-            }
-        }
-        else
-        {
-            Console.WriteLine("Goals file not found. Creating a new file.");
-            File.Create("goals.json").Close();
-        }
-
-        return existingGoals;
-    } */
 
 }

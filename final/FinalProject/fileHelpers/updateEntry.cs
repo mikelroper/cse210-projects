@@ -1,107 +1,147 @@
 // update user entry.  
 // save should be called automatically as part of the update.
 
-class RecordEvent
+class UpdateUser
 {
-    /* public List<BaseGoal> LoadedGoals { get; private set; }
-
-
-    public RecordEvent()
+    public static void UpdateUserEmployeeName(string employeeName, string newEmployeeName)
     {
-        var attributesList = LoadGoalsFromFile.LoadGoalsFromJson();
-        LoadedGoals = LoadGoalsFromFile.ConvertAttributesToBaseGoals(attributesList);
-        if (LoadedGoals == null)
-        {
-            LoadedGoals = new List<BaseGoal>();
-        }
-    }
+        List<Users> users = LoadJsonFile.LoadUsersFromJson();
 
-    public void DisplayGoals()
-    {
-        if (LoadedGoals != null && LoadedGoals.Any())
+        if (users != null && users.Any())
         {
-            Console.WriteLine("List of Goals:");
-            for (int i = 0; i < LoadedGoals.Count; i++)
+            Users userToUpdate = users.FirstOrDefault(u => u.GetEmployeeName() == employeeName);
+
+            if (userToUpdate != null)
             {
-                Console.WriteLine($"{i + 1}. Goal Name: {LoadedGoals[i].GoalName}, Description: {LoadedGoals[i].GoalDescription}, Points: {LoadedGoals[i].GoalPoints}, TotalPoints: {LoadedGoals[i].TotalPoints}");
+                userToUpdate.SetEmployeeName(newEmployeeName); 
+
+                // Save the updated user data back to the file
+                SaveUserToFile.SaveUserToJson(users);
+
+                Console.WriteLine($"User {employeeName}'s name updated to {newEmployeeName}.");
+            }
+            else
+            {
+                Console.WriteLine("User not found.");
             }
         }
         else
         {
-            Console.WriteLine("No goals to display.");
+            Console.WriteLine("No users to update.");
         }
     }
 
-    public void UpdateAndSaveGoals()
+    public static void UpdateUserTitle(string employeeName, string newTitle)
     {
-        // Logic to update goals and assign points
-        // Display the goals with their assigned numbers
-        DisplayGoals();
+        List<Users> users = LoadJsonFile.LoadUsersFromJson();
 
-        // Prompt the user to enter the number of the goal to update points
-        Console.WriteLine("Enter the number of the goal you completed: ");
-        int selectedGoalNumber;
-        while (!int.TryParse(Console.ReadLine(), out selectedGoalNumber) || selectedGoalNumber < 1 || selectedGoalNumber > LoadedGoals.Count)
+        if (users != null && users.Any())
         {
-            Console.WriteLine("Invalid input. Please enter a valid goal number.");
-            Console.WriteLine("Enter the number of the goal you completed: ");
-        }
+            Users userToUpdate = users.FirstOrDefault(u => u.GetEmployeeName() == employeeName);
 
-        var goalToUpdate = LoadedGoals[selectedGoalNumber - 1]; // Adjust index
-        // Set totalPoints to goalPoints initially
-        int goalPoints = goalToUpdate.GoalPoints;
-        goalToUpdate.UpdateTotalPoints(goalPoints);
+            if (userToUpdate != null)
+            {
+                userToUpdate.SetTitle(newTitle.ToUpper()); // Update the title for the specific user
 
-        // Show the initial totalPoints before updating
-        int totalPointsAcrossGoals = LoadedGoals.Sum(goal => goal.TotalPoints);
-        Console.WriteLine($"Total Points: {totalPointsAcrossGoals}");;
+                // Save the updated user data back to the file
+                SaveUserToFile.SaveUserToJson(users);
 
-        // Prompt for additional points and update totalPoints
-        Console.WriteLine($"Enter the additional points for {goalToUpdate.GoalName}: ");
-        if (int.TryParse(Console.ReadLine(), out int additionalPoints))
-        {
-            goalToUpdate.UpdateTotalPoints(additionalPoints);
-            SaveGoalsToFile.SaveGoalsToJson(LoadedGoals);
-            Console.WriteLine($"Points updated for {goalToUpdate.GoalName}. Goals saved successfully.");
+                Console.WriteLine($"User {employeeName}'s title updated to {newTitle}.");
+            }
+            else
+            {
+                Console.WriteLine("User not found.");
+            }
         }
         else
         {
-            Console.WriteLine("Invalid input for points.");
+            Console.WriteLine("No users to update.");
         }
     }
-    public void RecordEventAndUpdateGoals()
+
+    public static void UpdateUserHireDate(string employeeName, string newHireDate)
     {
-        DisplayGoals(); // Show the list of goals
-        
-        // Get the user's choice of which goal to update based on the event
-        Console.WriteLine("Enter the number of the goal you completed: ");
-        int selectedGoalNumber;
+        List<Users> users = LoadJsonFile.LoadUsersFromJson();
 
-        // Input validation to ensure a valid goal number is entered
-        while (!int.TryParse(Console.ReadLine(), out selectedGoalNumber) || selectedGoalNumber < 1 || selectedGoalNumber > LoadedGoals.Count)
+        if (users != null && users.Any())
         {
-            Console.WriteLine("Invalid input. Please enter a valid goal number.");
-            Console.WriteLine("Enter the number of the goal you completed: ");
-        }
+            Users userToUpdate = users.FirstOrDefault(u => u.GetEmployeeName() == employeeName);
 
-        // Get the selected goal from the loaded goals list
-        var goalToUpdate = LoadedGoals[selectedGoalNumber - 1]; // Adjust index
+            if (userToUpdate != null)
+            {
+                userToUpdate.SetHireDate(newHireDate); 
 
-        // Logic to record the event and update the goal properties (e.g., points)
-        Console.WriteLine($"Enter the points achieved for {goalToUpdate.GoalName}: ");
-        if (int.TryParse(Console.ReadLine(), out int pointsAchieved))
-        {
-            // Update the goal's points with the recorded event points
-            goalToUpdate.UpdateTotalPoints(pointsAchieved);
+                // Save the updated user data back to the file
+                SaveUserToFile.SaveUserToJson(users);
 
-            // Save the updated goals to the JSON file
-            SaveGoalsToFile.SaveGoalsToJson(LoadedGoals);
-
-            Console.WriteLine($"Points updated for {goalToUpdate.GoalName}. Goals saved successfully.");
+                Console.WriteLine($"User {employeeName}'s hire date updated to {newHireDate}.");
+            }
+            else
+            {
+                Console.WriteLine("User not found.");
+            }
         }
         else
         {
-            Console.WriteLine("Invalid input for points.");
+            Console.WriteLine("No users to update.");
         }
-    } */
+    }
+	
+    public static void UpdateUserEndDate(string employeeName, string newEndDate)
+    {
+        List<Users> users = LoadJsonFile.LoadUsersFromJson();
+
+        if (users != null && users.Any())
+        {
+            Users userToUpdate = users.FirstOrDefault(u => u.GetEmployeeName() == employeeName);
+
+            if (userToUpdate != null)
+            {
+                userToUpdate.SetEndDate(newEndDate); 
+
+                // Save the updated user data back to the file
+                SaveUserToFile.SaveUserToJson(users);
+
+                Console.WriteLine($"User {employeeName}'s hire date updated to {newEndDate}.");
+            }
+            else
+            {
+                Console.WriteLine("User not found.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("No users to update.");
+        }
+    }
+
+    public static void UpdateUserEmpStatus(string employeeName, string newEmpStatus)
+    {
+        List<Users> users = LoadJsonFile.LoadUsersFromJson();
+
+        if (users != null && users.Any())
+        {
+            Users userToUpdate = users.FirstOrDefault(u => u.GetEmployeeName() == employeeName);
+
+            if (userToUpdate != null)
+            {
+                userToUpdate.SetEmpStatus(newEmpStatus); 
+
+                // Save the updated user data back to the file
+                SaveUserToFile.SaveUserToJson(users);
+
+                Console.WriteLine($"User {employeeName}'s hire date updated to {newEmpStatus}.");
+            }
+            else
+            {
+                Console.WriteLine("User not found.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("No users to update.");
+        }
+    }
+
 }
+

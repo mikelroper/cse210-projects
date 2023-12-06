@@ -16,10 +16,19 @@ class Users
     {
         return EmployeeName;
     }
+    public void SetEmployeeName(string newName)
+    {
+        EmployeeName = newName;
+    }
 
     public string GetTitle()
     {
         return Title;
+    }
+
+public void SetTitle(string newTitle)
+    {
+        Title = newTitle;
     }
 
     public DateTime GetHireDate()
@@ -27,13 +36,43 @@ class Users
         return HireDate;
     }
 
+    public void SetHireDate(string newHireDate)
+    {
+        if (DateTime.TryParse(newHireDate, out DateTime result))
+        {
+            HireDate = result;
+        }
+        else
+        {
+            Console.WriteLine("Invalid date format for Hire Date.");
+        }
+    }
+
     public DateTime GetEndDate()
     {
-        return HireDate;
+        return EndDate;
     }
+
+    public void SetEndDate(string newEndDate)
+    {
+        if (DateTime.TryParse(newEndDate, out DateTime result))
+        {
+            EndDate = result;
+        }
+        else
+        {
+            Console.WriteLine("Invalid date format for End Date.");
+        }
+    }
+
     public bool GetEmpStatus()
     {
         return EmpStatus;
+    }
+
+    public void SetEmpStatus(string newEmpStatus)
+    {
+        EmpStatus = false;
     }
 
     // Constructor
@@ -69,19 +108,21 @@ class Users
         return new Users(employeeName, title, hireDate, endDate, true);
     }
 
-    /* public static void DisplayUsers(List<Users> users) //this is not needed here as it should be part of the load file process.
+    public static void DisplayAllUsers()
     {
+        List<Users> users = LoadJsonFile.LoadUsersFromJson();
+
         if (users != null && users.Any())
         {
-            Console.WriteLine("Current users:");
+            Console.WriteLine("All users:");
             foreach (var user in users)
             {
-                Console.WriteLine($"Name: {user.EmployeeName}; Title: {user.Title}; Hire Date: {user.HireDate}; Status: {user.EmpStatus}");
+                Console.WriteLine($"Name: {user.GetEmployeeName()}; Title: {user.GetTitle()}, HireDate: {user.GetHireDate()}, Employee Status: {user.GetEmpStatus()}");
             }
         }
         else
         {
-            Console.WriteLine("There are no users to display.");
+            Console.WriteLine("No users to display.");
         }
-    } */
+    }
 }
