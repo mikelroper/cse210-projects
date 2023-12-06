@@ -2,16 +2,27 @@ using System;
 
 public class MenuHelper
 {
-    public string displayName {get; set;}
+    private static string displayName {get; set;}
+    private static Time time = new Time();
+    private static ViewTime viewTime = new ViewTime();
+    //string Username = "";
 
 //need to prompt for name and position
 //File should save and load automatically.
 //all user data shouyld have the same format.
 // Menu should be different for manager and employee
 
+    public void SetDisplayNameFromAuthentication()
+    {
+        // Logic to authenticate the user and retrieve their name
+        Console.WriteLine("Please enter your username: ");
+        displayName = Console.ReadLine(); // Set the displayName from user input
+    }
+    
     public static void DisplayMenu()
     {
         Console.WriteLine("Welcome to TimeTracking");
+        Console.WriteLine($"Welcome {displayName}.  Please select and option from the menu: ");
         Console.WriteLine("1. Log Time Entry");
         Console.WriteLine("2. View Time");
         Console.WriteLine("3. View User");
@@ -35,78 +46,105 @@ public class MenuHelper
     }
 
 
-    public static void DisplayGoalMenu()  //change name and update
+    public static void LogTimeOptions()  
     {
-        Console.WriteLine("The Types of Goals Are:");
-        Console.WriteLine("1. Simple Goal");
-        Console.WriteLine("2. Eternal Goal");
-        Console.WriteLine("3. Checklist Goal");
+        Console.WriteLine("Which time option do you want to log? ");
+        Console.WriteLine("1. Log Start Time");
+        Console.WriteLine("2. Log End Time");
     }
-
-public static int GetUserGoalSelectedOption() //change name and update
-    {
-        Console.Write("Which Type of Goal would you like to create? ");
-        int choice;
-
-        while (!int.TryParse(Console.ReadLine(), out choice))
-        {
-            Console.WriteLine("Invalid choice. Please enter a valid option.");
-            Console.Write("Which Type of Goal would you like to create? ");
-        }
-
-        return choice;
-    }
-
 
 // This needs to be revamped -
     public static void HandleMenuOption(int choice)
     {
-        //SimpleGoal createdSimpleGoal; 
         switch (choice)
         {
-            case 1:
-                DisplayGoalMenu(); // Call DisplayGoalMenu
-                int goalTypeChoice = GetUserGoalSelectedOption(); // Get the user's choice for goal type
-                //HandleSubMenuOption(goalTypeChoice); // Handle the submenu option based on the user's choice
-                break;
-            
-            /* case 2:
-                List<Attributes> loadedGoals = LoadGoalsFromFile.LoadGoalsFromJson();
-                LoadGoalsFromFile.DisplayGoals(loadedGoals);
-                break;
-            
-            case 3:
-                List<Attributes> loadedGoalsForSave = LoadGoalsFromFile.LoadGoalsFromJson();
-                List<BaseGoal> baseGoalsList = loadedGoalsForSave.Select(goal => (BaseGoal)goal).ToList();
-                SaveGoalsToFile.SaveGoalsToJson(baseGoalsList); // Call the method to load goals from JSON
-                break;
-            case 4:
-                LoadGoalsFromFile.LoadGoalsFromJson(); // Call the method to load goals from JSON
-                break; */
-            case 5: //record event
+        case 1:
+            LogTimeOptions();
+            int timeEntryChoice = GetUserSelectedOption();
+            HandleSubMenuTimeOption(timeEntryChoice);
+            break;
+        
+        case 2:
+            if (empOrMgr.GetUserTitle(displayName) == "EMP")
+            {
+                ViewTime.ViewTimeEmp(displayName);
+            }
+            else 
+            {
+                ViewTime.ViewTimeMGR();
+            }
+            break;
+        
+        case 3:
+            if (empOrMgr.GetUserTitle(displayName) == "MGR")
+            {
+                Users.DisplayAllUsers();
+            }
+            else
+            {
+                Console.WriteLine("Option not authorized");
+            }
+            break;
 
+        case 4:
+            if (empOrMgr.GetUserTitle(displayName) == "MGR")
+            {
+                Users.CreateNewUser();
+            }
+            else
+            {
+                Console.WriteLine("Option not authorized");
+            }
+            break;
+
+        case 5: 
+            if (empOrMgr.GetUserTitle(displayName) == "MGR")
+            {
+                //This requires a submenu which will have case logic to call the differnt methods in updateUYser.cs
+                //UpdateUser.UpdateUserOption();
+            }
+            else
+            {
+                Console.WriteLine("Option not authorized");
+            }
+            break;
+            case 6:
+                //quit
                 break;
         }
     }
     
-    /* public static void HandleSubMenuOption(int choice)
+    public static void HandleSubMenuTimeOption(int choice)
     {
-        //createdSimpleGoal = null;  //add createdEternal and checklist here and in the declaration above?
         switch (choice)
         {
             case 1:
-                SimpleGoal simpleGoal = new SimpleGoal();
-                simpleGoal.CreateSimpleGoal();
+                time.LogStartTime();
+                Console.WriteLine("Start time logged.");
+                
                 break;
             case 2:
-                EternalGoal eternalGoal = new EternalGoal();
-                eternalGoal.CreateEternalGoal();
-                break;
-            case 3:
-                ChecklistGoal checklistGoal = new ChecklistGoal();
-                checklistGoal.CreateChecklistGoal();
+                time.LogEndTime();
+                Console.WriteLine("End time logged.");
                 break;
         }
 
-    } */
+    }
+
+    public static void HandleSubMenuUpdateUserOption(int choice)
+    {
+        switch (choice)
+        {
+            case 1:
+                time.LogStartTime();
+                Console.WriteLine("Start time logged.");
+                
+                break;
+            case 2:
+                time.LogEndTime();
+                Console.WriteLine("End time logged.");
+                break;
+        }
+
+    }
 }
