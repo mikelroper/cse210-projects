@@ -3,67 +3,87 @@ using System.Text.Json;
 
 class SaveUserToFile
 {
-    public static void SaveUserToJson(List<Users> user)
+    public static void SaveUserToJson(List<Users> usersList)
     {
         try
         {
-            if (user == null)
-            {
-                user = new List<Users>();
-            }
+            List<Users> existingUsers = new List<Users>();
 
             string fileName = "users.json";
 
             // Check if the file exists
-            if (!File.Exists(fileName))
+            if (File.Exists(fileName))
             {
-                // Create the file if it doesn't exist
-                File.Create(fileName).Close();
+                // Read existing data from users.json
+                string existingData = File.ReadAllText(fileName);
+
+                // Deserialize existing data to a list of Users objects
+                existingUsers = JsonSerializer.Deserialize<List<Users>>(existingData);
             }
 
-            // Serialize the user to JSON
-            string updatedJson = JsonSerializer.Serialize(user, new JsonSerializerOptions { WriteIndented = true });
+            if (usersList != null && usersList.Any())
+            {
+                // Append new users to the existing list
+                existingUsers.AddRange(usersList);
 
-            // Write the JSON to the file (overwrite existing content)
-            File.WriteAllText(fileName, updatedJson);
+                // Serialize the updated list to JSON
+                string updatedJson = JsonSerializer.Serialize(existingUsers, new JsonSerializerOptions { WriteIndented = true });
 
-            Console.WriteLine("User saved successfully.");
+                // Write the JSON to the file (overwrite existing content)
+                File.WriteAllText(fileName, updatedJson);
+
+                Console.WriteLine("Users appended successfully.");
+            }
+            else
+            {
+                Console.WriteLine("No new users to append.");
+            }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred while saving user: {ex.Message}");
+            Console.WriteLine($"An error occurred while appending users: {ex.Message}");
         }
-    } 
+    }
 
-    public static void SaveTimeToJson(List<Users> user)
+    public static void SaveTimeToJson(List<Time.TimeLog> timeLogs)
     {
         try
         {
-            if (user == null)
-            {
-                user = new List<Users>();
-            }
+            List<Time.TimeLog> existingTimeLogs = new List<Time.TimeLog>();
 
             string fileName = "time.json";
 
             // Check if the file exists
-            if (!File.Exists(fileName))
+            if (File.Exists(fileName))
             {
-                // Create the file if it doesn't exist
-                File.Create(fileName).Close();
+                // Read existing data from time.json
+                string existingData = File.ReadAllText(fileName);
+
+                // Deserialize existing data to a list of Time.TimeLog objects
+                existingTimeLogs = JsonSerializer.Deserialize<List<Time.TimeLog>>(existingData);
             }
 
-            // Serialize the goals to JSON
-            string updatedJson = JsonSerializer.Serialize(user, new JsonSerializerOptions { WriteIndented = true });
+            if (timeLogs != null)
+            {
+                // Append new time logs to the existing list
+                existingTimeLogs.AddRange(timeLogs);
 
-            // Write the JSON to the file (overwrite existing content)
-            File.WriteAllText(fileName, updatedJson);
+                // Serialize the updated list to JSON
+                string updatedJson = JsonSerializer.Serialize(existingTimeLogs, new JsonSerializerOptions { WriteIndented = true });
 
-            Console.WriteLine("Goals saved successfully.");
+                // Write the JSON to the file (overwrite existing content)
+                File.WriteAllText(fileName, updatedJson);
+
+                Console.WriteLine("Time logs appended successfully.");
+            }
+            else
+            {
+                Console.WriteLine("No new time logs to append.");
+            }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred while saving goals: {ex.Message}");
+            Console.WriteLine($"An error occurred while appending time logs: {ex.Message}");
         }
-    } 
+    }
 }

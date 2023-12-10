@@ -3,14 +3,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
-class Users
+public class Users
 {
-    private string EmployeeName { get; set; }
-    private string Title { get; set; }
-    private DateTime HireDate { get; set; }
-    private DateTime EndDate { get; set; }
-    private bool EmpStatus { get; set; }
+    public string EmployeeName { get; set; }
+    public string Title { get; set; }
+    public DateTime HireDate { get; set; }
+    public DateTime EndDate { get; set; }
+    public bool EmpStatus { get; set; }
 
     public string GetEmployeeName()
     {
@@ -75,7 +76,13 @@ public void SetTitle(string newTitle)
         EmpStatus = false;
     }
 
+    public Users()
+    {
+        // Default constructor needed for deserialization
+    }
+
     // Constructor
+    [JsonConstructor]
     public Users(string employeeName, string title, DateTime hireDate, DateTime endDate, bool empStatus)
     {
         EmployeeName = employeeName;
@@ -104,11 +111,12 @@ public void SetTitle(string newTitle)
         Console.WriteLine("Hire Date is set as today.");
         DateTime hireDate = DateTime.Now;
         DateTime endDate = DateTime.MinValue;
+        bool EmpStatus = true;
 
-        return new Users(employeeName, title, hireDate, endDate, true);
+        return new Users(employeeName, title, hireDate, endDate, EmpStatus);
     }
 
-    public static void DisplayAllUsers()
+    public static List<Users> DisplayAllUsers()
     {
         List<Users> users = LoadJsonFile.LoadUsersFromJson();
 
@@ -124,5 +132,8 @@ public void SetTitle(string newTitle)
         {
             Console.WriteLine("No users to display.");
         }
+        return users;
     }
+
+    
 }

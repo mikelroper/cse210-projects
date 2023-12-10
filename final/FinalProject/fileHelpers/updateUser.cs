@@ -1,7 +1,7 @@
 // update user entry.  
 // save should be called automatically as part of the update.
 
-class UpdateUser
+public class UpdateUser
 {
     public static void UpdateUserEmployeeName(string employeeName, string newEmployeeName)
     {
@@ -14,10 +14,7 @@ class UpdateUser
             if (userToUpdate != null)
             {
                 userToUpdate.SetEmployeeName(newEmployeeName); 
-
-                // Save the updated user data back to the file
                 SaveUserToFile.SaveUserToJson(users);
-
                 Console.WriteLine($"User {employeeName}'s name updated to {newEmployeeName}.");
             }
             else
